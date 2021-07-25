@@ -64,9 +64,8 @@ const login = async (req, res = response) => {
             });
         }
         
-        
+        //Validar a password
         const validPassword = bcrypt.compareSync( password, userDB.password );
-
         if ( !validPassword ) {
             return res.status(400).json({
                 ok: false,
@@ -97,12 +96,29 @@ const login = async (req, res = response) => {
 }
 
 
+//Verificar o JWT e renovar caso tenha expirado
+const renewToken = async (req, res = response) => {
 
+    const uid = req.uid;
+    
+    //Gerar novo JWT
+    const token = await generarJWT(uid);
+    
+    //Obter user por id
+    const user = await User.findById(uid);
+    
 
+    res.json({
+        ok: true,
+        user,
+        token
+    });
 
+}
 
 module.exports = {
 
     createUser,
-    login
+    login,
+    renewToken
 }
