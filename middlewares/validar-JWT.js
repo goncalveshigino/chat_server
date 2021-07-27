@@ -1,11 +1,9 @@
-
 const jwt = require('jsonwebtoken');
 
 
 const validarJWT = ( req, res, next ) => {
     
-  //Ler token
-    
+    //Ler token
     const token = req.header('x-token');
 
     if (!token) {
@@ -15,7 +13,7 @@ const validarJWT = ( req, res, next ) => {
         });
     }
 
-//Validar token
+    //Validar token
     try {
 
         const { uid } = jwt.verify( token, process.env.JWT_KEY );
@@ -31,8 +29,6 @@ const validarJWT = ( req, res, next ) => {
         });
         
     }
-    
-
     
 
 }

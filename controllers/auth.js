@@ -20,7 +20,7 @@ const createUser = async (req, res = response) => {
             })
         }
 
-        const user = new User(req.body)
+        const user = new User(req.body);
         
         //Encriptar senha
         const salt = bcrypt.genSaltSync();
@@ -48,7 +48,7 @@ const createUser = async (req, res = response) => {
 }
 
 
-
+//Login
 const login = async (req, res = response) => {
     
     const { email, password } = req.body;
@@ -60,7 +60,7 @@ const login = async (req, res = response) => {
         if (!userDB) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Email invalido'
+                msg: 'Email ou password nao conferi'
             });
         }
         
@@ -69,7 +69,7 @@ const login = async (req, res = response) => {
         if ( !validPassword ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Senha invalida'
+                msg: 'Email ou password nao conferi'
             });
         }
 

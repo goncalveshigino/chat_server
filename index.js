@@ -35,4 +35,4 @@ server.listen(process.env.PORT, (err) => {
     if (err) throw new Error(err);
     
     console.log(`Servidor rodando na porta `, process.env.PORT)
-})
+});
